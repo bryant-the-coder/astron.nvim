@@ -12,3 +12,5 @@ local cmp = {
 }
 
 return cmp
+
+-- TODO: use this as reference https://github.com/tiagovla/tokyodark.nvim/blob/master/lua/tokyodark/highlights.lua#L209

@@ -1,24 +1,27 @@
-local cfg = require("astron.config").config
+local conf = require("astron.config").config
 
 -- TODO: add transparents
 
 local base = {
+	-- Italic stuff
+	Comment = { fg = C.grey_2, bg = C.none, style = conf.comment_style },
+	Conditional = { fg = C.purple, bg = C.none, style = conf.keyword_style },
+	Keyword = { fg = C.purple, bg = C.none, style = conf.keyword_style },
+	Repeat = { fg = C.purple, bg = C.none, style = conf.keyword_style },
+	Function = { fg = C.blue, bg = C.none, style = conf.function_style },
+
+	-- Basic stuff
 	Normal = { fg = C.fg, bg = C.bg },
-	Comment = { fg = C.grey_2, bg = C.none, style = "italic" },
+	Boolean = { fg = C.orange, bg = C.none, style = conf.boolean_style},
 	Constant = { fg = C.yellow, bg = C.none },
 	String = { fg = C.green, bg = C.none },
 	Character = { fg = C.green, bg = C.none },
 	Number = { fg = C.orange, bg = C.none },
-	Boolean = { fg = C.blue, bg = C.none },
 	Float = { fg = C.yellow, bg = C.none },
 	Identifier = { fg = C.blue, bg = C.none },
-	Function = { fg = C.yellow, bg = C.none, style = "italic" },
 	Statement = { fg = C.purple, bg = C.none },
-	Conditional = { fg = C.purple, bg = C.none },
-	Repeat = { fg = C.purple, bg = C.none },
 	Label = { fg = C.blue, bg = C.none },
 	Operator = { fg = C.purple, bg = C.none },
-	Keyword = { fg = C.purple, bg = C.none },
 	Exception = { fg = C.purple, bg = C.none },
 	Preproc = { fg = C.yellow, bg = C.none },
 	Include = { fg = C.purple, bg = C.none },

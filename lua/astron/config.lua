@@ -15,11 +15,11 @@ local function opt(key, default)
   end
 
 config = {
-	italic = opt("enable_italic", true),
-	italic_comments = opt("italic_comments", true) and "italic" or "NONE",
-	italic_keywords = opt("italic_keywords", true) and "italic" or "NONE",
-	italic_functions = opt("italic_function", false) and "italic" or "NONE",
-	italic_variables = opt("italic_variables", true) and "italic" or "NONE",
+	comment_style = opt("italic_comments", true) and "italic" or "NONE",
+	keyword_style = opt("italic_keywords", false) and "italic" or "NONE",
+	boolean_style = opt("italic_booleans", false) and "italic" or "NONE",
+	function_style = opt("italic_functions", false) and "italic" or "NONE",
+	variable_style = opt("italic_variables", false) and "italic" or "NONE",
 }
 
 return config

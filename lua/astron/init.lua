@@ -1,34 +1,368 @@
-vim.cmd "hi clear"
-if vim.fn.exists "syntax_on" then
-  vim.cmd "syntax reset"
+local C = require("astron.colors")
+local conf = require("astron.config").config
+local utils = require("astron.util")
+local M = {}
+
+-- TODO: add transparents
+
+local set_groups = function ()
+	local groups = {
+		-- Italic stuff
+		Comment = { fg = C.grey_2, bg = C.none, style = conf.comment_style },
+		Conditional = { fg = C.purple, bg = C.none, style = conf.keyword_style },
+		Keyword = { fg = C.purple, bg = C.none, style = conf.keyword_style },
+		Repeat = { fg = C.purple, bg = C.none, style = conf.keyword_style },
+		Function = { fg = C.blue, bg = C.none, style = conf.function_style },
+
+		-- Basic stuff
+		Normal = { fg = C.fg, bg = C.bg },
+		Boolean = { fg = C.orange, bg = C.none, style = conf.boolean_style},
+		Constant = { fg = C.yellow, bg = C.none },
+		String = { fg = C.green, bg = C.none },
+		Character = { fg = C.green, bg = C.none },
+		Number = { fg = C.orange, bg = C.none },
+		Float = { fg = C.yellow, bg = C.none },
+		Identifier = { fg = C.blue, bg = C.none },
+		Statement = { fg = C.purple, bg = C.none },
+		Label = { fg = C.blue, bg = C.none },
+		Operator = { fg = C.purple, bg = C.none },
+		Exception = { fg = C.purple, bg = C.none },
+		Preproc = { fg = C.yellow, bg = C.none },
+		Include = { fg = C.purple, bg = C.none },
+		Define = { fg = C.purple, bg = C.none },
+		Title = { fg = C.cyan, bg = C.none },
+		Macro = { fg = C.purple, bg = C.none },
+		PreCondit = { fg = C.blue, bg = C.none },
+		Type = { fg = C.blue, bg = C.none },
+		StorageClass = { fg = C.blue, bg = C.none },
+		Structure = { fg = C.yellow, bg = C.none },
+		Typedef = { fg = C.yellow, bg = C.none },
+		Special = { fg = C.blue, bg = C.none },
+		SpecialComment = { fg = C.grey, bg = C.none },
+		Error = { fg = C.red, bg = C.none },
+		Todo = { fg = C.purple, bg = C.none },
+		Underlined = { fg = C.cyan, bg = C.none },
+		Cursor = { fg = C.none, bg = C.none },
+		ColorColumn = { fg = C.none, bg = C.grey_4 },
+		CursorLineNr = { fg = C.fg, bg = C.none },
+		Conceal = { fg = C.grey, bg = C.none },
+		CursorColumn = { fg = C.none, bg = C.grey_4 },
+		CursorLine = { fg = C.none, bg = C.grey_8 },
+		Directory = { fg = C.blue, bg = C.none },
+		DiffAdd = { fg = C.grey_3, bg = C.green },
+		DiffChange = { fg = C.yellow, bg = C.none },
+		DiffDelete = { fg = C.grey_3, bg = C.red },
+		DiffText = { fg = C.grey_3, bg = C.yellow },
+		ErrorMsg = { fg = C.red, bg = C.none },
+		VertSplit = { fg = C.black, bg = C.none },
+		Folded = { fg = C.grey, bg = C.none },
+		FoldColumn = { fg = C.none, bg = C.none },
+		IncSearch = { fg = C.blue_1, bg = C.grey },
+		LineNr = { fg = C.grey_2, bg = C.none },
+		NonText = { fg = C.grey_1, bg = C.none },
+		Pmenu = { fg = C.fg, bg = C.black_1 },
+		PmenuSel = { fg = C.none, bg = C.grey_4 },
+		PmenuSbar = { fg = C.none, bg = C.grey_3 },
+		PmenuThumb = { fg = C.none, bg = C.fg },
+		Question = { fg = C.purple, bg = C.none },
+		QuickFixLine = { fg = C.grey_3, bg = C.yellow },
+		Search = { fg = C.grey_3, bg = C.yellow },
+		SignColumn = { fg = C.bg, bg = C.bg },
+		SpecialKey = { fg = C.grey_1, bg = C.none },
+		SpellBad = { fg = C.red, bg = C.none },
+		SpellCap = { fg = C.yellow, bg = C.none },
+		SpellLocal = { fg = C.yellow, bg = C.none },
+		SpellRare = { fg = C.yellow, bg = C.none },
+		StatusLine = { fg = C.fg, bg = C.bg },
+		StatusLineNC = { fg = C.grey, bg = C.none },
+		StatusLineTerm = { fg = C.fg, bg = C.grey_4 },
+		StatusLineTermNC = { fg = C.grey_4, bg = C.none },
+		TabLine = { fg = C.grey, bg = C.none },
+		TabLineSel = { fg = C.fg, bg = C.none },
+		TabLineFill = { fg = C.none, bg = C.grey_3 },
+		Terminal = { fg = C.fg, bg = C.grey_3 },
+		Visual = { fg = C.none, bg = C.grey_5 },
+		VisualNOS = { fg = C.grey_5, bg = C.none },
+		WarningMsg = { fg = C.yellow, bg = C.none },
+		WildMenu = { fg = C.grey_3, bg = C.blue },
+		EndOfBuffer = { fg = C.bg, bg = C.none },
+		FloatBorder = { bg = C.none },
+		MatchParen = { fg = C.none, bg = C.grey_5 },
+
+		  -- Italics stuff
+		  TSComment = { fg = C.grey_2, bg = C.none, style = conf.comment_style },
+		  TSBoolean = { fg = C.orange, bg = C.none, style = conf.boolean_style },
+		  TSConditional = { fg = C.purple, bg = C.none, style = conf.keyword_style },
+		  TSKeyword = { fg = C.purple, bg = C.none, style = conf.keyword_style },
+		  TSKeywordReturn = { fg = C.purple, style = conf.keyword_style },
+		  TSRepeat = { fg = C.purple, bg = C.none, style = conf.keyword_style },
+		  TSFunction = { fg = C.blue, bg = C.none, style = conf.function_style },
+		  TSKeywordFunction = { fg = C.blue, bg = C.none, conf.function_style },
+		  TSFuncBuiltin = { fg = C.blue, bg = C.bgnone, style = conf.function_style },
+		  TSMethod = { fg = C.blue, bg = C.none, style = conf.function_style },
+
+		  -- Basic stuff
+		  TSError = { fg = C.red, bg = C.none },
+		  TSPunctDelimiter = { fg = C.fg, bg = C.none },
+		  TSPunctBracket = { fg = C.fg, bg = C.none },
+		  TSPunctSpecial = { fg = C.fg, bg = C.none },
+		  TSConstant = { fg = C.yellow, bg = C.none },
+		  TSConstBuiltin = { fg = C.orange, bg = C.none },
+		  TSConstMacro = { fg = C.red, bg = C.none },
+		  TSStringRegex = { fg = C.green, bg = C.none },
+		  TSString = { fg = C.green, bg = C.none },
+		  TSStringEscap = { fg = C.red, bg = C.none },
+		  TSCharacter = { fg = C.green, bg = C.none },
+		  TSNumber = { fg = C.orange, bg = C.none },
+		  TSFloat = { fg = C.green, bg = C.none },
+		  TSAnnotation = { fg = C.yellow, bg = C.none },
+		  TSAttribute = { fg = C.red, bg = C.none },
+		  TSNamespace = { fg = C.purple, bg = C.none },
+		  TSFuncMacro = { fg = C.yellow, bg = C.none },
+		  TSParameter = { fg = C.red, bg = C.none },
+		  TSParameterReference = { fg = C.cyan, bg = C.none },
+		  TSField = { fg = C.red, bg = C.none },
+		  TSProperty = { fg = C.yellow, bg = C.none },
+		  TSConstructor = { fg = C.yellow, bg = C.none },
+		  TSLabel = { fg = C.blue, bg = C.none },
+		  TSKeywordOperator = { fg = C.purple, bg = C.none },
+		  TSOperator = { fg = C.cyan, bg = C.none },
+		  TSException = { fg = C.purple, bg = C.none },
+		  TSType = { fg = C.blue, bg = C.none },
+		  TSTypeBuiltin = { fg = C.blue, bg = C.none },
+		  TSStructure = { fg = C.purple, bg = C.none },
+		  TSInclude = { fg = C.purple, bg = C.none },
+		  TSVariable = { fg = C.red, bg = C.none, style = conf.variable_style },
+		  TSVariableBuiltin = { fg = C.yellow, bg = C.none, style = conf.variable_style },
+		  TSText = { fg = C.fg, bg = C.none },
+		  TSStrong = { fg = C.fg, bg = C.none },
+		  TSEmphasis = { fg = C.fg, bg = C.none },
+		  TSUnderline = { fg = C.fg, bg = C.none },
+		  TSTitle = { fg = C.fg, bg = C.none },
+		  TSLiteral = { fg = C.fg, bg = C.none },
+		  TSURI = { fg = C.fg, bg = C.none },
+		  TSTag = { fg = C.red, bg = C.none },
+		  TSTagDelimiter = { fg = C.fg, bg = C.none },
+		  rainbowcol1 = { fg = "Gold", bg = C.none },
+		  rainbowcol2 = { fg = "Orchid", bg = C.none },
+		  rainbowcol3 = { fg = "LightSkyBlue", bg = C.none },
+		  rainbowcol4 = { fg = "Gold", bg = C.none },
+		  rainbowcol5 = { fg = "Orchid", bg = C.none },
+		  rainbowcol6 = { fg = "LightSkyBlue", bg = C.none },
+		  rainbowcol7 = { fg = "Orchid", bg = C.none },
+
+
+	  -- Telescope
+	  TelescopeResultsTitle = { fg = C.green, style = "italic" },
+	  TelescopePromptTitle = { fg = C.blue },
+	  TelescopePreviewTitle = { fg = C.purple },
+	  TelescopeResultsBorder = { fg = C.fg },
+	  TelescopePromptBorder = { fg = C.fg },
+	  TelescopePreviewBorder = { fg = C.fg },
+	  TelescopeSelectionCaret = { fg = C.red },
+	  TelescopeMatching = { fg = C.yellow },
+	  TelescopeSelection = { bg = C.grey_5 },
+	  TelescopeMultiSelection = { fg = C.blue },
+	  TelescopeMultiIcon = { fg = C.blue },
+	  TelescopeNormal = { fg = C.fg, bg = C.bg },
+	  TelescopePreviewNormal = { fg = C.fg, bg = C.bg },
+	  TelescopePromptNormal = { fg = C.fg, bg = C.bg },
+	  TelescopeResultsNormal = { fg = C.fg, bg = C.bg },
+	  TelescopeBorder = { fg = C.fg },
+	  TelescopeTitle = { fg = C.fg },
+	  TelescopePromptCounter = { fg = C.red },
+	  TelescopePromptPrefix = { fg = C.blue },
+	  TelescopePreviewLine = { fg = C.grey_5 },
+	  TelescopePreviewMatch = { fg = C.yellow },
+	  TelescopePreviewPipe = { fg = C.yellow },
+	  TelescopePreviewCharDev = { fg = C.yellow },
+	  TelescopePreviewDirectory = { fg = C.blue },
+	  TelescopePreviewBlock = { fg = C.yellow },
+	  TelescopePreviewLink = { fg = C.blue },
+	  TelescopePreviewSocket = { fg = C.purple },
+	  TelescopePreviewRead = { fg = C.yellow },
+	  TelescopePreviewWrite = { fg = C.purple },
+	  TelescopePreviewExecute = { fg = C.green },
+	  TelescopePreviewHyphen = { fg = C.grey_1 },
+	  TelescopePreviewSticky = { fg = C.blue },
+	  TelescopePreviewSize = { fg = C.green },
+	  TelescopePreviewUser = { fg = C.yellow },
+	  TelescopePreviewGroup = { fg = C.yellow },
+	  TelescopePreviewDate = { fg = C.blue },
+	  TelescopePreviewMessage = { fg = C.fg },
+	  TelescopePreviewMessageFillchar = { fg = C.fg },
+	  TelescopeResultsClass = { fg = C.yellow },
+	  TelescopeResultsConstant = { fg = C.yellow },
+	  TelescopeResultsField = { fg = C.red },
+	  TelescopeResultsFunction = { fg = C.blue },
+	  TelescopeResultsMethod = { fg = C.blue },
+	  TelescopeResultsOperator = { fg = C.cyan },
+	  TelescopeResultsStruct = { fg = C.purple },
+	  TelescopeResultsVariable = { fg = C.red },
+	  TelescopeResultsLineNr = { fg = C.grey_1 },
+	  TelescopeResultsIdentifier = { fg = C.blue },
+	  TelescopeResultsNumber = { fg = C.orange },
+	  TelescopeResultsComment = { fg = C.grey_2 },
+	  TelescopeResultsSpecialComment = { fg = C.grey },
+	  TelescopeResultsDiffChange = { fg = C.none, bg = C.yellow },
+	  TelescopeResultsDiffAdd = { fg = C.none, bg = C.green },
+	  TelescopeResultsDiffDelete = { fg = C.none, bg = C.red },
+	  TelescopeResultsDiffUntracked = { fg = C.none, bg = C.grey_1 },
+
+	  -- NvimTree
+	  NvimTreeFolderIcon = { fg = C.blue },
+	  NvimTreeExecFile = { fg = C.green },
+	  NvimTreeOpenedFile = { fg = C.green },
+	  NvimTreeRootFolder = { fg = C.fg },
+	  NvimTreeEndOfBuffer = { fg = C.bg },
+	  NvimTreeNormal = { bg = C.blue_2 },
+	  NvimTreeNormalNC = { bg = C.blue_2 },
+	  NvimTreeVertSplit = { fg = C.blue_2, bg = C.blue_2 },
+	  NvimTreeImageFile = { fg = C.purple },
+	  NvimTreeSymlink = { fg = C.cyan },
+	  NvimTreeSpecialFile = { fg = C.yellow },
+	  NvimTreeGitDeleted = { fg = C.red },
+	  NvimTreeGitMerge = { fg = C.orange },
+	  NvimTreeGitRenamed = { fg = C.purple },
+	  NvimTreeGitStaged = { fg = C.green },
+	  NvimTreeGitDirty = { fg = C.red },
+	  NvimTreeGitNew = { fg = C.yellow },
+
+	  -- VimWiki
+	  VimwikiLink = { fg = C.cyan, bg = C.none },
+	  VimwikiHeaderChar = { fg = C.grey, bg = C.none },
+	  VimwikiHR = { fg = C.yellow, bg = C.none },
+	  VimwikiList = { fg = C.orange, bg = C.orange },
+	  VimwikiTag = { fg = C.orange, bg = C.orange },
+	  VimwikiMarkers = { fg = C.grey, bg = C.none },
+	  VimwikiHeader1 = { fg = C.orange, bg = C.none, style = "bold" },
+	  VimwikiHeader2 = { fg = C.green, bg = C.none, style = "bold" },
+	  VimwikiHeader3 = { fg = C.blue, bg = C.none, style = "bold" },
+	  VimwikiHeader4 = { fg = C.cyan, bg = C.none, style = "bold" },
+	  VimwikiHeader5 = { fg = C.yellow, bg = C.none, style = "bold" },
+	  VimwikiHeader6 = { fg = C.purple, bg = C.none, style = "bold" },
+
+	  -- IndentBlankLine
+	  IndentBlanklineSpaceChar = { fg = C.grey_6, style = "nocombine" },
+	  IndentBlanklineChar = { fg = C.grey_6, style = "nocombine" },
+	  IndentBlanklineContextStart = { fg = C.grey_7, style = "underline" },
+	  IndentBlanklineContextChar = { fg = C.grey_7, style = "nocombine" },
+	  IndentBlanklineSpaceCharBlankline = { fg = C.grey_6, style = "nocombine" },
+
+	  -- GitSigns
+	  GitSignsAdd = { fg = C.green, bg = C.none },
+	  GitSignsChange = { fg = C.orange_1, bg = C.none },
+	  GitSignsDelete = { fg = C.red_1, bg = C.none },
+	  MoreMsg = { fg = C.green, style = "bold" },
+	  ModeMsg = { fg = C.grey, style = "bold" },
+
+	  -- Dashboard
+	  DashboardHeader = { fg = C.cyan },
+	  DashboardShortcut = { fg = C.yellow },
+	  DashboardFooter = { fg = C.purple, style = "italic" },
+	  DashboardCenter = { fg = C.blue },
+
+	  -- WhichKey
+	  WhichKeyFloat = { fg = C.fg },
+	  WhichKeyDesc = { fg = C.blue },
+	  WhichKeyGroup = { fg = C.blue },
+
+	  -- SymbolsOutline
+	  FocusedSymbol = { fg = C.yellow, bg = C.none },
+
+	  -- Markdown
+		markdownH1 = { fg = C.red_1 },
+		markdownH2 = { fg = C.red_1 },
+		markdownH3 = { fg = C.red_1 },
+		markdownH4 = { fg = C.red_1 },
+		markdownH5 = { fg = C.red_1 },
+		markdownH6 = { fg = C.red_1 },
+		markdownHeadingDelimiter = { fg = C.red_1 },
+		markdownHeadingRule = { fg = C.grey_3 },
+		markdownBold = { fg = C.light_blue, style = "bold" },
+		markdownItalic = { style = "italic" },
+		markdownBlockquote = { fg = C.grey_1 },
+		markdownBoldDelimiter = { fg = C.grey_1 },
+		markdownCode = { fg = C.green },
+		markdownCodeBlock = { fg = C.green },
+		markdownCodeDelimeter = { fg = C.green },
+		markdownId = { fg = C.purple },
+		markdownIdDelimeter = { fg = C.purple },
+		markdownIdDeclaration = { fg = C.blue },
+		markdownUrl = { fg = C.cyan },
+		markdownLinkDelimeter = { fg = C.purple },
+		markdownLinkText = { fg = C.blue_3 },
+		markdownListMarker = { fg = C.red },
+		markdownOrderedListMarker = { fg = C.red },
+		markdownRul = { fg = C.grey },
+
+		-- LSP & LSP saga
+		DiagnosticError = { fg = C.red_1 },
+		DiagnosticWarn = { fg = C.orange_1 },
+		DiagnosticInfo = { fg = C.white_2 },
+		DiagnosticHint = { fg = C.yellow_1 },
+		DiagnosticHeader = { fg = C.green_2 },
+		DiagnosticUnderlineError = { style = "undercurl", sp = C.red_2 },
+		DiagnosticUnderlineWarn = { style = "undercurl", sp = C.red_2 },
+		DiagnosticUnderlineInfo = { style = "undercurl", sp = C.red_2 },
+		DiagnosticUnderlineHint = { style = "undercurl", sp = C.red_2 },
+		LspReferenceText = { fg = C.none, bg = C.grey_5 },
+		LspReferenceRead = { fg = C.none, bg = C.grey_5 },
+		LspReferenceWrite = { fg = C.none, bg = C.grey_5 },
+		LspSagaDiagnosticBorder = { fg = C.white_1 },
+		LspSagaSignatureHelpBorder = { fg = C.white_1 },
+		LspSagaLspFinderBorder = { fg = C.white_1 },
+		LspSagaCodeActionBorder = { fg = C.white_1 },
+		LspSagaDefPreviewBorder = { fg = C.white_1 },
+		LspSagaHoverBorder = { fg = C.white_1 },
+		LspSagaRenameBorder = { fg = C.white_1 },
+		LspSagaRenamePromptPrefix = { fg = C.white_1 },
+		LspFloatWinBorder = { fg = C.white_1 },
+		LspSagaDiagnosticTruncateLine = { fg = C.white_1 },
+		LspSagaShTruncateLine = { fg = C.white_1 },
+		LspSagaDocTruncateLine = { fg = C.white_1 },
+		LspSagaCodeActionTruncateLine = { fg = C.white_1 },
+		ProviderTruncateLine = { fg = C.white_1 },
+		DiagnosticTruncateLine = { fg = C.white_1, style = "bold" },
+		LspSagaCodeActionTitle = { fg = C.yellow, style = "bold" },
+		LspSagaCodeActionContent = { fg = C.green, style = "bold" },
+		LspFloatWinNormal = { fg = C.fg, bg = C.black_1 },
+		LspDiagnosticsFloatingError = { fg = C.red_1 },
+		LspDiagnosticsFloatingWarn = { fg = C.orange_1 },
+		LspDiagnosticsFloatingInfor = { fg = C.white_2 },
+		LspDiagnosticsFloatingHint = { fg = C.yellow_1 },
+		LspSagaDiagnosticHeader = { fg = C.yellow },
+		LspSagaBorderTitle = { fg = C.yellow, style = "bold" },
+		DiagnosticInformation = { fg = C.yellow, style = "bold" },
+
+		-- CMP
+		CmpItemAbbrMatch = { fg = C.blue_3 },
+		CmpItemAbbrMatchFuzzy = { fg = C.blue_3},
+		CmpItemKindVariable = {fg = C.light_blue},
+		CmpItemKindInterface = {fg = C.light_blue},
+		CmpItemKindText = {fg = C.light_blue},
+		CmpItemKindFunction = {fg = C.purple},
+		CmpItemKindMethod = {fg = C.purple},
+		CmpItemKindKeyword = {fg = C.white_3},
+		CmpItemKindProperty = {fg = C.white_3},
+		CmpItemKindUnit = {fg = C.purple},
+	}
+
+	for group, parameters in pairs(groups) do
+		utils.highlight(group, parameters)
+	end
 end
-vim.o.background = "dark"
-vim.o.termguicolors = true
-vim.g.colors_name = "astron"
 
--- IMPORTANT files
--- Don't ever ever ever remove this
-C = require "astron.colors"
-conf = require "astron.config"
-local util = require "astron.util"
+M.colorscheme = function ()
+	vim.api.nvim_command("hi clear")
+	if vim.fn.exists("syntax_on") then
+		vim.api.nvim_command("syntax reset")
+	end
 
--- requiring all files
-local base = require "astron.base"
-local treesitter = require "astron.treesitter"
-local lsp = require "astron.lsp"
-local others = require "astron.others"
-local cmp = require "astron.cmp"
-local markdown = require"astron.markdown"
+	vim.o.termguicolors = true
+	vim.g.colors_name = "astron"
 
-local astron = {
-  base,
-  cmp,
-  treesitter,
-  markdown,
-  lsp,
-  others,
-}
-
-for _, astron in ipairs(astron) do
-  util.initialise(astron)
+	set_groups()
 end
+
+return M

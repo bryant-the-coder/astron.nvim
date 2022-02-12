@@ -1,7 +1,7 @@
-local variants = require("substrata.colors")
+local variants = require("astron.colors")
 local conf = require("astron.config").config
 local C = variants[conf.variant]
-local utils = require("astron.util")
+local utils = require("astron.utils")
 local M = {}
 
 -- TODO: add transparents

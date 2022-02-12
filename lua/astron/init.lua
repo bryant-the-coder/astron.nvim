@@ -9,7 +9,7 @@ vim.g.colors_name = "astron"
 -- IMPORTANT files
 -- Don't ever ever ever remove this
 C = require "astron.colors"
-Config = require "astron.config"
+conf = require "astron.config"
 local util = require "astron.util"
 
 -- requiring all files

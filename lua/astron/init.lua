@@ -1,5 +1,6 @@
-local C = require("astron.colors")
+local variants = require("substrata.colors")
 local conf = require("astron.config").config
+local C = variants[conf.variant]
 local utils = require("astron.util")
 local M = {}
 

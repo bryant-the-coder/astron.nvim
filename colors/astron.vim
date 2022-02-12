@@ -1,2 +1,2 @@
-lua package.loaded['substrata'] = nil
-lua require('substrata').colorscheme()
+lua package.loaded['astron'] = nil
+lua require('astron').colorscheme()

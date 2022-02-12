@@ -361,7 +361,6 @@ M.colorscheme = function()
   vim.o.termguicolors = true
   vim.g.colors_name = "astron"
 
-  set_terminal_colors()
   set_groups()
 end
 

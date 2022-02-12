@@ -1,13 +1,11 @@
 local variants = require("astron.colors")
-local conf = require("astron.config").config
-local C = variants[conf.variant]
+local cfg = require("astron.config").config
+local C = variants[cfg.variant]
 local utils = require("astron.utils")
 local M = {}
 
--- TODO: add transparents
-
-local set_groups = function ()
-	local groups = {
+local set_groups = function()
+  local groups = {
 		-- Italic stuff
 		Comment = { fg = C.grey_2, bg = C.none, style = conf.comment_style },
 		Conditional = { fg = C.purple, bg = C.none, style = conf.keyword_style },
@@ -347,23 +345,24 @@ local set_groups = function ()
 		CmpItemKindKeyword = {fg = C.white_3},
 		CmpItemKindProperty = {fg = C.white_3},
 		CmpItemKindUnit = {fg = C.purple},
-	}
+  }
 
-	for group, parameters in pairs(groups) do
-		utils.highlight(group, parameters)
-	end
+  for group, parameters in pairs(groups) do
+    utils.highlight(group, parameters)
+  end
 end
 
-M.colorscheme = function ()
-	vim.api.nvim_command("hi clear")
-	if vim.fn.exists("syntax_on") then
-		vim.api.nvim_command("syntax reset")
-	end
-	vim.o.background = "dark"
-	vim.o.termguicolors = true
-	vim.g.colors_name = "astron"
+M.colorscheme = function()
+  vim.api.nvim_command("hi clear")
+  if vim.fn.exists("syntax_on") then
+    vim.api.nvim_command("syntax reset")
+  end
 
-	set_groups()
+  vim.o.termguicolors = true
+  vim.g.colors_name = "astron"
+
+  set_terminal_colors()
+  set_groups()
 end
 
 return M

@@ -1,6 +1,9 @@
 local variants = require("astron.colors")
-local cfg = require("astron.config").config
-local c = variants[cfg.variant]
+print(vim.inspect(variants))
+local conf = require("astron.config").config
+print(vim.inspect(conf))
+local c = variants[conf.variant]
+print(vim.inspect(c))
 local utils = require("astron.utils")
 local M = {}
 

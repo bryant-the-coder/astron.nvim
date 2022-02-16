@@ -31,7 +31,36 @@ Plug 'bryant-the-coder/astron.nvim'
 ```
 
 ### Configurationsa
+> Configuration needs to be set **BEFORE** loading the color scheme with `colorscheme substrata`
 
-| Options       | Default | Description      |
-| ------------- | ------- | ---------------- |
-| astron_italic | `true`    | enabling italics |
+| Option                     | Default   | Description              |
+| -------------------------- | --------- | ------------------------ |
+| astron_italic_comments  | `true`    | Make comments italic     |
+| astron_italic_keywords  | `false`   | Make keywords italic     |
+| astron_italic_booleans  | `false`   | Make booleans italic     |
+| astron_italic_functions | `false`   | Make functions italic    |
+| astron_italic_variables | `false`   | Make variables italic    |
+
+```lua
+-- Example in lua :)
+vim.g.astron_italic_comments = true
+
+vim.cmd[[colorscheme astron]]
+```
+
+```vim
+" Example config in Vim Script
+let g:astron_italic_functions = 1
+
+" Load the colorscheme
+colorscheme astron
+```
+
+### Credits
+This theme won't be create if it wasnt because of this wonderful peoples colorscheme
+
+- [https://github.com/joshdick/onedark.vim](Onedark) for the inspiration
+- [https://github.com/LunarVim/onedarker.nvim](Onedarker.nvim) by Chris@Machine
+- [https://github.com/kvrohit/substrata.nvim](substrata)
+- [https://github.com/kabinspace/AstroVim](AstroVim)
+> The author has written this colorscheme and I have permission to borrow this theme and modify it. The author will also use this colorscheme in the future

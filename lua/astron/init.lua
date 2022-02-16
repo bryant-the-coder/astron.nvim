@@ -1,6 +1,6 @@
 local variants = require("astron.colors")
 local cfg = require("astron.config").config
-local c = variants[cfg.variants]
+local C = variants[cfg.variants]
 local utils = require("astron.utils")
 local M = {}
 

@@ -1,4 +1,4 @@
 lua << EOF
-lua package.loaded['astron'] = nil
-lua require('astron')
+package.loaded['astron'] = nil
+require("astron")
 EOF

@@ -4,6 +4,10 @@
 
 A dark colorscheme based on [https://github.com/joshdick/onedark.vim](Onedark)
 
+### Showcase
+<img src="./screenshots/dashboard.png" />
+<img src = "./screenshots/demo_code1.png" />
+
 ### Features
 
 - Support for multiple plugins :)
@@ -64,3 +68,4 @@ This theme won't be create if it wasnt because of this wonderful peoples colorsc
 - [https://github.com/kvrohit/substrata.nvim](substrata)
 - [https://github.com/kabinspace/AstroVim](AstroVim)
 > The author has written this colorscheme and I have permission to borrow this theme and modify it. The author will also use this colorscheme in the future
+- [https://github.com/ThemerCorp/themer.lua](themer.lua) for their code as a screenshots

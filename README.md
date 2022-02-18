@@ -2,7 +2,7 @@
 
 ### About
 
-A dark colorscheme based on [https://github.com/joshdick/onedark.vim](Onedark)
+A dark colorscheme based on [Onedark](https://github.com/joshdick/onedark.vim)
 
 ### Showcase
 <img src="./screenshots/dashboard.png" />
@@ -63,9 +63,9 @@ colorscheme astron
 ### Credits
 This theme won't be create if it wasnt because of this wonderful peoples colorscheme
 
-- [https://github.com/joshdick/onedark.vim](Onedark) for the inspiration
-- [https://github.com/LunarVim/onedarker.nvim](Onedarker.nvim) by Chris@Machine
-- [https://github.com/kvrohit/substrata.nvim](substrata)
-- [https://github.com/kabinspace/AstroVim](AstroVim)
+- [Onedark](https://github.com/joshdick/onedark.vim) for the inspiration
+- [Onedark.nvim](https://github.com/LunarVim/onedarker.nvim) by Chris@Machine
+- [substrata](https://github.com/kvrohit/substrata.nvim)
+- [AstroVim](https://github.com/kabinspace/AstroVim)
 > The author has written this colorscheme and I have permission to borrow this theme and modify it. The author will also use this colorscheme in the future
-- [https://github.com/ThemerCorp/themer.lua](themer.lua) for their code as a screenshots
+- [themer.lua](https://github.com/ThemerCorp/themer.lua) for their code as a screenshots

@@ -25,13 +25,13 @@ Install the theme with your preferred package manager:
 [packer](https://github.com/wbthomason/packer.nvim)
 
 ```lua
-use 'bryant-the-coder/astron.nvim'
+use "bryant-the-coder/astron.nvim"
 ```
 
 [vim-plug](https://github.com/junegunn/vim-plug)
 
 ```vim
-Plug 'bryant-the-coder/astron.nvim'
+Plug "bryant-the-coder/astron.nvim"
 ```
 
 ### Configurations

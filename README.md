@@ -34,8 +34,8 @@ use 'bryant-the-coder/astron.nvim'
 Plug 'bryant-the-coder/astron.nvim'
 ```
 
-### Configurationsa
-> Configuration needs to be set **BEFORE** loading the color scheme with `colorscheme substrata`
+### Configurations
+> Configuration needs to be set **BEFORE** loading the color scheme with `colorscheme astron`
 
 | Option                     | Default   | Description              |
 | -------------------------- | --------- | ------------------------ |

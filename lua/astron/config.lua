@@ -1,23 +1,22 @@
-local M = {}
+local config
+
+vim = vim or { g = {}, o = {} }
 
 local function opt(key, default)
-	key = "astron" .. key
 	if vim.g[key] == nil then
 		return default
 	end
 	if vim.g[key] == 0 then
 		return false
 	end
-
 	return vim.g[key]
 end
 
-M.config = {
-	comment_style = opt("italic_comments", true) and "italic" or "NONE",
-	keyword_style = opt("italic_keywords", false) and "italic" or "NONE",
-	boolean_style = opt("italic_booleans", false) and "italic" or "NONE",
-	function_style = opt("italic_functions", false) and "italic" or "NONE",
-	variable_style = opt("italic_variables", false) and "italic" or "NONE",
+config = {
+	italic_comments = opt("italic_keywords", true) and "italic" or "NONE",
+	italic_keywords = opt("italic_keywords", false) and "italic" or "NONE",
+	italic_functions = opt("italic_function", false) and "italic" or "NONE",
+	italic_variables = opt("italic_variables", false) and "italic" or "NONE",
 }
 
-return M
+return config

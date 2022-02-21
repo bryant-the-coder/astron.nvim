@@ -1,6 +1,4 @@
-local M = {}
-
-M.default = {
+local colors = {
 	none = "NONE",
 	fg = "#abb2bf",
 	bg = "#15171c",
@@ -42,4 +40,4 @@ M.default = {
 	purple = "#c678dd",
 }
 
-return M
+return colors

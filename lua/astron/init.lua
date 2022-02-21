@@ -17,7 +17,7 @@ local others = require("astron.others")
 local cmp = require("astron.cmp")
 local markdown = require("astron.markdown")
 
-local astron = {
+local skeletons = {
 	base,
 	cmp,
 	treesitter,
@@ -26,8 +26,6 @@ local astron = {
 	others,
 }
 
-for _, file in ipairs(astron) do
-	for group, colors in pairs(file) do
-		util.highlight(group, colors)
-	end
+for _, skeleton in ipairs(skeletons) do
+	util.initialise(skeleton)
 end

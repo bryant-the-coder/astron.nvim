@@ -1,12 +1,25 @@
 local M = {}
 
-function M.highlight(group, color)
-	local fg = color.fg and "guifg = " .. color.fg or "guifg = NONE"
-	local bg = color.bg and "guibg = " .. color.bg or "guibg = NONE"
-	local sp = color.sp and "guisp = " .. color.sp or "guisp = NONE"
-	local style = color.style and "gui = " .. color.style or "gui = NONE"
+local function highlight(group, properties)
+	local bg = properties.bg == nil and "" or "guibg=" .. properties.bg
+	local fg = properties.fg == nil and "" or "guifg=" .. properties.fg
+	local style = properties.style == nil and "" or "gui=" .. properties.style
 
-	vim.cmd("highlight " .. group .. " " .. style .. " " .. fg .. " " .. bg .. " " .. sp .. " ")
+	local cmd = table.concat({
+		"highlight",
+		group,
+		bg,
+		fg,
+		style,
+	}, " ")
+
+	vim.api.nvim_command(cmd)
+end
+
+function M.initialise(skeleton)
+	for group, properties in pairs(skeleton) do
+		highlight(group, properties)
+	end
 end
 
 return M

@@ -47,7 +47,7 @@ local treesitter = {
 	TSLiteral = { fg = C.fg },
 	TSURI = { fg = C.fg },
 	TSTag = { fg = C.red },
-	TSComment = { fg = C.greu_2 },
+	TSComment = { fg = C.gray_2 },
 	TSTagDelimiter = { fg = C.fg },
 	rainbowcol1 = { fg = "Gold" },
 	rainbowcol2 = { fg = "Orchid" },

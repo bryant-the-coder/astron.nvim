@@ -1,6 +1,6 @@
 local base = {
 	Normal = { fg = C.fg, bg = C.bg },
-	Comment = { fg = C.grey_2, bg = C.none, style = "italic" },
+	Comment = { fg = C.grey_2, bg = C.none, style = Config.italic_comments },
 	Constant = { fg = C.yellow, bg = C.none },
 	String = { fg = C.green, bg = C.none },
 	Character = { fg = C.green, bg = C.none },

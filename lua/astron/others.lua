@@ -1,7 +1,28 @@
 local others = {
 
+	-- Bufferline
+	BufferLineFill = { fg = C.grey_9, bg = C.grey_4 },
+	BufferLineBackground = { fg = C.grey_9, bg = C.grey_4 },
+	BufferLineBufferVisible = { fg = C.fg, bg = C.bg },
+	BufferLineBufferSelected = { fg = C.fg, bg = C.bg, style = C.none },
+	BufferLineTab = { fg = C.fg, bg = C.bg },
+	BufferLineTabSelected = { fg = C.bg, bg = C.bg },
+	BufferLineTabClose = { fg = C.bg, bg = C.bg },
+	BufferLineIndicatorSelected = { fg = C.bg, bg = C.bg },
+	BufferLineSeparator = { fg = C.grey_4, bg = C.grey_4 },
+	BufferLineSeparatorVisible = { fg = C.bg, bg = C.bg },
+	BufferLineSeparatorSelected = { fg = C.grey_4, bg = C.grey_4 },
+	BufferLineCloseButton = { fg = C.grey_9, bg = C.grey_4 },
+	BufferLineCloseButtonVisible = { fg = C.grey_10, bg = C.bg },
+	BufferLineCloseButtonSelected = { fg = C.red_4, bg = C.bg },
+	BufferLineModified = { fg = C.red_4, bg = C.grey_4 },
+	BufferLineModifiedVisible = { fg = C.fg, bg = C.bg },
+	BufferLineModifiedSelected = { fg = C.green_2, bg = C.bg },
+	BufferLineError = { fg = C.red_1, bg = C.red_1 },
+	BufferLineErrorDiagnostic = { fg = C.red_1, bg = C.red_1 },
+
 	-- Telescope
-	TelescopeResultsTitle = { fg = C.green, style = "italic" },
+	TelescopeResultsTitle = { fg = C.green },
 	TelescopePromptTitle = { fg = C.blue },
 	TelescopePreviewTitle = { fg = C.purple },
 	TelescopeResultsBorder = { fg = C.fg },
@@ -20,7 +41,7 @@ local others = {
 	TelescopeTitle = { fg = C.fg },
 	TelescopePromptCounter = { fg = C.red },
 	TelescopePromptPrefix = { fg = C.blue },
-	TelescopePreviewLine = { fg = C.grey_5 },
+	TelescopePreviewLine = { bg = C.grey_5 },
 	TelescopePreviewMatch = { fg = C.yellow },
 	TelescopePreviewPipe = { fg = C.yellow },
 	TelescopePreviewCharDev = { fg = C.yellow },
@@ -107,7 +128,7 @@ local others = {
 	-- Dashboard
 	DashboardHeader = { fg = C.cyan },
 	DashboardShortcut = { fg = C.yellow },
-	DashboardFooter = { fg = C.purple, style = "italic" },
+	DashboardFooter = { fg = C.purple },
 	DashboardCenter = { fg = C.blue },
 
 	-- WhichKey

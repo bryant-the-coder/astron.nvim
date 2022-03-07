@@ -15,7 +15,7 @@ local cmp = {
 	CmpItemAbbr = { fg = C.fg },
 	CmpItemAbbrDeprecated = { C.fg },
 	CmpItemAbbrMatch = { C.cyan },
-	CmpItemAbbrMatchFuzzy = { fg = c.cyan },
+	CmpItemAbbrMatchFuzzy = { fg = C.cyan },
 	CmpItemMenu = { C.grey_1 },
 
 	CmpItemKindDefault = { C.purple },
